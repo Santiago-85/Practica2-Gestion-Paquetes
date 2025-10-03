@@ -14,6 +14,13 @@ This project was developed as part of Practice No. 2 for the Web Programming cou
 * **In-Memory State Management**: Uses an Angular Service to manage the application's state and share data between components without a database.
 * **Responsive Design**: The interface is fully responsive and adapts to different screen sizes, from mobile to desktop, using Bootstrap.
 
+##  Tech Stack
+
+* **Framework**: Angular
+* **Language**: TypeScript
+* **Styling**: Bootstrap 5
+* **Version Control**: Git & GitHub
+
 ##  How to Run The Project Locally
 
 To run this project on your own machine, follow these steps:
