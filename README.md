@@ -1,59 +1,31 @@
-# GestionPaquetes
+[Read this in Spanish](README.es.md)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+---
 
-## Development server
+# Practice #2 - Angular Package Management App
 
-To start a local development server, run:
+This project was developed as part of Practice No. 2 for the Web Programming course at Universidad Mesoamericana. The application allows users to register and track shipping packages, meeting all the specified requirements.
 
-```bash
-ng serve
-```
+##  Key Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* **Order Creation**: A form to register new packages with custom validations (name, email, description, etc.).
+* **Order Update**: Allows searching for an order by its package number and updating its status following a logical transition sequence.
+* **Package Tracking**: A view for the end-user to track their package using a unique tracking ID and view the update history.
+* **In-Memory State Management**: Uses an Angular Service to manage the application's state and share data between components without a database.
+* **Responsive Design**: The interface is fully responsive and adapts to different screen sizes, from mobile to desktop, using Bootstrap.
 
-## Code scaffolding
+##  How to Run The Project Locally
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To run this project on your own machine, follow these steps:
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1.  Clone or download the repository.
+2.  Open a terminal in the project's root folder.
+3.  Install the necessary dependencies with the command:
+    ```bash
+    npm install
+    ```
+4.  Start the Angular development server with the command:
+    ```bash
+    ng serve -o
+    ```
+5.  The application will automatically open in your browser at `http://localhost:4200/`.
