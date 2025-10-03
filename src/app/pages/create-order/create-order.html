@@ -1,0 +1,83 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+      <h2>Crear Nueva Orden de Envío</h2>
+      <p>Registre la información para realizar un nuevo envío.</p>
+      <hr>
+
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+          <label for="senderName" class="form-label">Nombre completo del remitente</label>
+          <input type="text" class="form-control" id="senderName" placeholder="Ej: Ana María López" formControlName="senderName"
+                [class.is-invalid]="f.senderName.invalid && f.senderName.touched">
+          <div *ngIf="f.senderName.invalid && f.senderName.touched" class="invalid-feedback">
+            <div *ngIf="f.senderName.errors?.['required']">El nombre es obligatorio.</div>
+            <div *ngIf="f.senderName.errors?.['pattern']">El nombre solo puede contener letras y espacios.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Dirección de entrega</label>
+          <input type="text" class="form-control" id="address" placeholder="Ej: 10a. Calle 14-25, Zona 1" formControlName="address"
+                [class.is-invalid]="f.address.invalid && f.address.touched">
+          <div *ngIf="f.address.invalid && f.address.touched" class="invalid-feedback">
+            <div *ngIf="f.address.errors?.['required']">La dirección es obligatoria.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" placeholder="nombre@gmail.com" formControlName="email"
+                [class.is-invalid]="f.email.invalid && f.email.touched">
+          <div *ngIf="f.email.invalid && f.email.touched" class="invalid-feedback">
+            <div *ngIf="f.email.errors?.['required']">El correo es obligatorio.</div>
+            <div *ngIf="f.email.errors?.['email']">El formato del correo no es válido.</div>
+            <div *ngIf="f.email.errors?.['pattern']">Solo se permiten correos de Gmail o Outlook.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción de la entrega</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"
+                    [class.is-invalid]="f.description.invalid && f.description.touched"></textarea>
+          <div *ngIf="f.description.invalid && f.description.touched" class="invalid-feedback">
+            <div *ngIf="f.description.errors?.['required']">La descripción es obligatoria.</div>
+            <div *ngIf="f.description.errors?.['minlength']">La descripción debe tener al menos 40 caracteres.</div>
+            <div *ngIf="f.description.errors?.['maxlength']">La descripción no puede exceder los 120 caracteres.</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="orderForm.invalid">Registrar Orden</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="successModalLabel">¡Orden Registrada Exitosamente!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Guarda los siguientes datos para dar seguimiento a tu paquete.</p>
+        <div>
+          <strong>Número de Paquete:</strong>
+          <input type="text" readonly class="form-control" [value]="generatedPackageNumber">
+        </div>
+        <div class="mt-2">
+          <strong>ID de Seguimiento:</strong>
+          <input type="text" readonly class="form-control" [value]="generatedTrackingId">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+</div>

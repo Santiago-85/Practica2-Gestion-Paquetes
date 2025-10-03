@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-9">
+      <h2>Actualización de Estado de la Orden</h2>
+      <p>Busca una orden por su número de paquete para actualizar su estado.</p>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Ingrese el número de paquete..." #searchInput>
+            <button class="btn btn-outline-primary" type="button" (click)="onSearch(searchInput.value)">Buscar</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="foundOrder" class="card mt-4">
+        <div class="card-header"><h4>Resultado de la Búsqueda</h4></div>
+        <div class="card-body">
+          <p><strong>Remitente:</strong> {{ foundOrder.senderName }}</p>
+          <p><strong>Dirección:</strong> {{ foundOrder.address }}</p>
+          <p><strong>Estado Actual:</strong> <span class="badge bg-info">{{ foundOrder.status }}</span></p>
+          <hr>
+          
+          <div *ngIf="availableStatuses.length > 0; else finalState">
+            <h5>Actualizar Estado</h5>
+            <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+              <div class="mb-3">
+                <label class="form-label">Nuevo Estado</label>
+                <select class="form-select" formControlName="newStatus">
+                  <option *ngFor="let status of availableStatuses" [value]="status">{{ status }}</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Comentario</label>
+                <textarea class="form-control" rows="2" formControlName="comment"
+                          [class.is-invalid]="uf.comment.invalid && uf.comment.touched"></textarea>
+                <div *ngIf="uf.comment.invalid && uf.comment.touched" class="invalid-feedback">
+                  <div *ngIf="uf.comment.errors?.['required']">El comentario es obligatorio.</div>
+                  <div *ngIf="uf.comment.errors?.['minlength']">Debe tener al menos 20 caracteres.</div>
+                  <div *ngIf="uf.comment.errors?.['maxlength']">No puede exceder los 40 caracteres.</div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Responsable de la Actualización</label>
+                <input type="text" class="form-control" formControlName="responsible"
+                      [class.is-invalid]="uf.responsible.invalid && uf.responsible.touched">
+                <div *ngIf="uf.responsible.invalid && uf.responsible.touched" class="invalid-feedback">
+                  <div *ngIf="uf.responsible.errors?.['required']">El responsable es obligatorio.</div>
+                  <div *ngIf="uf.responsible.errors?.['pattern']">El nombre solo puede contener letras.</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success" [disabled]="updateForm.invalid">Actualizar Orden</button>
+            </form>
+          </div>
+
+          <ng-template #finalState>
+            <div class="alert alert-success">
+              Esta orden ya ha completado su ciclo y no puede ser actualizada.
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+
+      <div *ngIf="searchMessage" class="alert alert-warning mt-4">{{ searchMessage }}</div>
+    </div>
+
+    </div>
+  </div>
+
+<div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateSuccessModalLabel">¡Actualización Exitosa!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>El estado de la orden ha sido actualizado correctamente.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>

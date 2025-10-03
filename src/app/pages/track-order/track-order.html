@@ -1,0 +1,54 @@
+<div class="container mt-4">
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-9">
+        <h2>Seguimiento de Paquete</h2>
+        <p>Ingrese el ID de seguimiento de 12 letras para ver el estado y el historial de su paquete.</p>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Ingrese el ID de seguimiento..." #searchInput>
+                <button class="btn btn-outline-primary" type="button" (click)="onSearch(searchInput.value)">Rastrear</button>
+            </div>
+            </div>
+        </div>
+
+        <div *ngIf="foundOrder" class="card mt-4">
+            <div class="card-header">
+            <h4>Historial del Paquete #{{ foundOrder.packageNumber }}</h4>
+            </div>
+            <div class="card-body">
+            <p><strong>Estado Actual:</strong> <span class="badge bg-success fs-6">{{ foundOrder.status }}</span></p>
+            <p><strong>Destino:</strong> {{ foundOrder.address }}</p>
+
+            <h5 class="mt-4">Historial de Actualizaciones</h5>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Comentario</th>
+                    <th scope="col">Responsable</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let update of foundOrder.history">
+                    <td>{{ update.date | date:'short' }}</td>
+                    <td>{{ update.status }}</td>
+                    <td class="text-break">{{ update.comment }}</td>
+                    <td>{{ update.responsible }}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    
+
+            <div *ngIf="searchMessage" class="alert alert-warning mt-4">
+            {{ searchMessage }}
+            </div>
+        </div>
+    </div>
+  </div>
